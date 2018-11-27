@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Design CNN App-Web</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <script src="{{ url_for('static', filename='js/action.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/graficar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sweetalert.min.js') }}"></script>
+    <script src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+  </head>
+  <body>
+    <header>
+      <!--<div class="container-logo">
+        <a href="http://www.inpec.gov.co/" target="_blank"><img src="images/logo.png" alt="img responsive" class="img-responsive img-fluid center-block" width="60%"></a>
+
+      </div>-->
+      <div class="container-fluid">
+        <section class="main-row">
+          <div class="col-md-6 col-sm-6 center-block">
+            <img id="caron" src="{{ url_for('static', filename='images/logoProducto.png') }}" alt="img caron" class="img-responsive img-fluid center-block">
+          </div>
+          <!--<div class="col-md-4 center-block">
+            <a href="#"><p id="nosotros" align="center"><img  src="images/contacts-icon.png" alt="img responsive" width="60" height="60"> ABOUT US </p></a>
+          </div>-->
+          <div class="col-md-6 col-sm-6 center-block">
+            <a  href="#" target="_blank"><img id="lgF" src="{{ url_for('static', filename='images/Escudo_UD.png') }}" alt="img caron" class="img-responsive img-fluid center-block"></a>
+          </div>
+        </section>
+
+      </div>
+    </header>
+
+
+
+
+    <!--<div class="">-->
+      <nav class="navbar navbar-expand-lg navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-1">
+              <span class="sr-only">Menu</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-home"></span> DeCNN</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar-1">
+            <ul class="nav navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="manuales">Manuales</a>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="search">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </nav>
+
+      <div class="container">
+        <div id="descripcion">
+          <h1>Bienvenido a DeCNN</h1>
+          <hr/ id="separador">
+          <br>
+          <h2 text-align="center">Esta aplicación proporciona un entorno Web intuitivo para el diseño, entrenamiento, evaluación y descarga de modelos de Redes Neuronales por Convolución (CNN) haciendo uso de Keras, una biblioteca de red neuronal de código abierto escrita en Python</h2>
+          <br>
+          <br>
+          <h4 text-align="center">Dentro de la aplicación, se encontrará una zona de diseño de la CNN, una zona de visualización del Modelo, una zona de evaluación mediante las Curvas de ROC, una zona de Predicción para probar el modelo y una zona de descarga para descargar el modelo y un compendio de datos</h4>
+          <br>
+        </div>
+      </div>
+
+      <hr/ id="separador">
+
+     <div class="container-fluid">
+       <h1>Zona de Diseño</h1>
+       <hr/ id="separador">
+      <section class="main row">
+        <div class="panel panel-primary col-md-4 col-sm-4">
+          <h2>1. Selecciona las capas del modelo </h2>
+          <hr/ id="separador">
+          <div class="panel-body">
+                <form>
+                  <div class="center-block form-group">
+                    <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Aplica un filtro sobre la entrada extrayendo y devolviendo un mapa de las características de la entrada original, reduciendo el tamaño de los parámetros">
+                        <h3><b>Capa de Convolution</b></h3>
+                    </span>
+
+                    <div class="row">
+                      <div class="col-md-8 center-block">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Entero, la dimensionalidad del espacio de salida (es decir, el número de filtros de salida en la convolución).">
+                              <h5><b>Filtros</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-8">
+                            <input type="number" min=1 max=64 id="filters">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Tipo de relleno, para conservar la mayor cantidad de información">
+                              <h5><b>Relleno</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-8">
+                            <select id="padding">
+                                <option value="same">Same</option>
+                                <option value="valid">Valid</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Función de activación de la Capa de Convolución">
+                              <h5><b>Activación</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-8">
+                            <select id="activation">
+                                <option value="relu">Relu</option>
+                                <option value="softmax">Softmax</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 center-block" align="center">
+                        <button id="btnAddConv" type="button" class="btn" align="center">Adicionar</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr/ id="separador">
+                  <div class="center-block form-group">
+                    <span id="capaUno" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Reduce las dimensiones espaciales del volumen de entrada para la siguiente capa">
+                      <h3><b>Capa de Maxpooling</b></h3>
+                    </span>
+
+                    <div class="row">
+                      <div class="col-md-8 center-block">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Tupla de 2 enteros, factores por los cuales reducir la escala (vertical, horizontal)">
+                              <h5><b>Dimensión</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-3">
+                            <input type="number" min=1  id="dimensionUno">
+                          </div>
+                          <div class="col-md-2">
+                            <p>,</p>
+                          </div>
+                          <div class="col-md-3">
+                            <input type="number"  id="dimensionDos">
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 center-block" align="center">
+                        <button id="btnAddPooling" type="button" class="btn">Adicionar</button>
+                      </div>
+                    </div>
+
+                  </div>
+                <hr/ id="separador">
+                  <div class="center-block form-group">
+                    <span id="capaUno" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ayuda de evitar el sobre entrenamiento, estableciendo una tasa de fracción en cada actualización en el tiempo de entrenamiento">
+                      <h3><b>Capa de Dropout</b></h3>
+                    </span>
+
+                    <div class="row">
+                      <div class="col-md-8 center-block">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title=" Número entre 0 y 1. Fracción de las unidades de entrada a eliminar.">
+                              <h5><b>Tasa</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-8">
+                            <input type="number" step=0.25 min=0 max=1 id="rate">
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-4 center-block" align="center">
+                        <button id="btnAddDropout" type="button" class="btn">Adicionar</button>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/ id="separador">
+                  <div class="center-block form-group">
+                    <span id="capaUno" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Capa totalmente conectada y a menudo se encuentra al final de la red neuronal">
+                      <h3><b>Capa de Dense</b></h3>
+                    </span>
+
+                    <div class="row">
+                      <div class="col-md-8 center-block">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Entero positivo, dimensionalidad del espacio de salida.">
+                              <h5><b>Unidades</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-8">
+                            <input type="number" min=1 id="units">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <!--<label for="filters">Filters</label>-->
+                            <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Función de activación de la Capa Dense">
+                              <h5><b>Activación</b></h5>
+                            </span>
+
+                          </div>
+                          <div class="col-md-8">
+                            <select id="activacion">
+                                <option value="relu">Relu</option>
+                                <option value="softmax">Softmax</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 center-block" align="center">
+                        <button id="btnAddDense" type="button" class="btn">Adicionar</button>
+                      </div>
+                    </div>
+                  </div>
+                  <hr/ id="separador">
+
+                  <div class="center-block form-group">
+                    <span id="capaUno" class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Representación de un arreglo unidimensional del proceso realizado anteriormente en la CNN">
+                        <h3><b>Capa de Flatten</b></h3>
+                    </span>
+
+                    <div class="row">
+                      <div class="col-md-8 center-block">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <!--<label for="filters">Filters</label>-->
+                            <span></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 center-block" align="center">
+                        <button id="btnAddFlatten" type="button" class="btn">Adicionar</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
+        <span class="col-md-1"></span>
+        <div class="panel panel-primary col-md-4 col-sm-4">
+          <h2>2. Selecciona los parámetros de compilación, entrenamiento y conjunto de datos</h2>
+          <hr/ id="separador">
+          <div class="center-block form-group">
+            <h3><b>Parámetros de Compilación</b></h3>
+            <hr/ id="separador">
+            <div class="row">
+              <div class="col-md-12 center-block">
+                <div class="row">
+                  <div class="col-md-4">
+                    <!--<label for="filters">Filters</label>-->
+                    <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Función de optimización de la red neuronal por convolución">
+                      <h5><b>Optimizador</b></h5>
+                    </span>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select id="optimizer">
+                        <option value="rmsprop">rmsprop</option>
+                        <option value="adam">adam</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <!--<label for="filters">Filters</label>-->
+                    <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Función de pérdida de la red neuronal por convolución">
+                      <h5><b>Función de Pérdida</b></h5>
+                    </span>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select id="loss">
+                        <option value="categorical_crossentropy">categorical_crossentropy</option>
+                        <option value="mean_squared_error">mean_squared_error</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <!--<label for="filters">Filters</label>-->
+                    <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Métrica asiganada a la red neuronal por convolución">
+                      <h5><b>Métrica</b></h5>
+                    </span>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select id="metric">
+                        <option value="accuracy">accuracy</option>
+                        <option value="mse">mse</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <hr/ id="separador">
+
+            <div class="center-block form-group">
+              <h3><b>Parámetros de Entrenamiento</b></h3>
+              <hr/ id="separador">
+              <div class="row">
+                <div class="col-md-12 center-block">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <!--<label for="filters">Filters</label>-->
+                      <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Número de muestras que se propagarán a través de la red.">
+                        <h5><b>Batch_size</b></h5>
+                      </span>
+
+                    </div>
+                    <div class="col-md-8">
+                      <input type="number" min=1 id="batch">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <!--<label for="filters">Filters</label>-->
+                      <span  class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Corte arbitrario, generalmente definido como una pasada sobre todo el conjunto de datos, utilizado para separar el entrenamiento en fases distintas">
+                        <h5><b>Epochs</b></h5>
+                      </span>
+
+                    </div>
+                    <div class="col-md-8">
+                      <input type="number" min=1 id="epocs">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="center-block form-group" >
+              <h3><b>Conjunto de datos</b></h3>
+              <hr/ id="separador">
+              <div align="center">
+                <label class="radio-inline"><input type="radio" name="optradio" value="cifar" checked>CIFAR10</label>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Conjunto de datos que contiene 60.000 imágenes distribuidas en 10 clases como lo son: aviones, automóviles, aves, gatos, venados, perros, ranas, caballos, barcos y camiones">
+                      <img id="iconoInformacion" src="{{ url_for('static', filename='images/iconoInfo.png') }}" alt="img caron" class="img-responsive img-fluid" height="30" width="30">
+                </span>
+                <label class="radio-inline"><input type="radio" name="optradio" value="mnist">MNIST</label>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Conjunto de datos que contiene 60.000 imágenes distribuidas en 10 clases enfocadas en los números naturales del 0 al 9">
+                      <img id="iconoInformacion" src="{{ url_for('static', filename='images/iconoInfo.png') }}" alt="img caron" class="img-responsive img-fluid" height="30" width="30">
+                </span>
+
+                <label class="radio-inline"><input type="radio" name="optradio" value="f-mnist">FASHION-MNIST</label>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Conjunto de datos que contiene 60.000 imágenes distribuidas en 10 clases como lo son: camiseta, pantalón, jersey, vestido, abrigo, sandalias, camisa, zapatillas, bolsos y botines">
+                      <img id="iconoInformacion" src="{{ url_for('static', filename='images/iconoInfo.png') }}" alt="img caron" class="img-responsive img-fluid" height="30" width="30">
+                </span>
+              </div>
+
+            </div>
+      </div>
+
+         <span class="col-md-1"></span>
+
+         <div class="panel panel-primary col-md-2 col-sm-2" id="terminosVerificacion">
+              <h2>3. Visualización del modelo </h2>
+
+               <hr/ id="separador">
+              <div class="panel-body">
+                  <h4 id="noticiasTitulo">Modelo</h4>
+                  <br>
+                  <select id="terminosAgregados" class="form-control center-block" size = 8>
+                  </select>
+                  <br>
+                  <br>
+                  <br>
+                  <button id="btnDelete" type="button" class="btn center-block">Entrenar</button>
+           </div>
+          </div>
+
+      </section>
+     </div>
+
+
+
+     <div class="content">
+        <div id="zonaAnalisis" class="container" hidden>
+          <h1>Modelo</h1>
+          <hr/ id="separador">
+          <p>En esta sección, se puede visualizar el modelo implementado; este modelo se obtuvo de acuerdo a las funciones enfocadas en visualización de modelo que tiene Keras</p>
+          <p>Nota: Al darle clic a la imagen, se descargará automáticamente</p>
+          <hr/ id="separador">
+          <div>
+            <a id='visualizacionModelo' download="modelo.png" href="/static/images/model.png" title="ImageName">
+            </a>
+          </div>
+          <hr/ id="separador">
+          <h1>Zona de Análisis</h1>
+          <hr/ id="separador">
+          <section class="main row">
+            <div id="datosMetricas" class="col-md-6" align="center">
+                <h2>Función de Pérdida</h2>
+                <hr/ id="separador">
+                <h3 id="funcionLoss"></h3>
+            </div>
+            <div id="datosMetricas" class="col-md-6" align="center">
+              <h2 >Métrica</h2>
+              <hr/ id="separador">
+                <h3 id="funcionMetrics"></h3>
+            </div>
+          </section>
+          <section class="main row">
+            <div id="datosMetricas" class="col-md-6">
+              <hr/ id="separador">
+              <p>Este gráfico muestra la pérdida en los conjuntos de entrenamiento y de validación durante las épocas de entrenamiento</p>
+              <hr/ id="separador">
+              <canvas id="popChartTres"></canvas>
+              <div class="center-block form-group" align="center">
+                <label id="labelFormat" for="formatoUno" class="d-inline-block">Formato</label>
+                <select id="formatoTres" class="d-inline-block">
+                   <option value="png">png</option>
+                   <option value="jpeg">jpeg</option>
+                   <option value="bmp">bmp</option>
+                   <option value="tiff">tiff</option>
+                </select>
+                <button id="downloadCanvasTres" type="button" class="btn d-inline-block">Descargar</button>
+              </div>
+            </div>
+            <div id="datosMetricas" class="col-md-6">
+              <hr/ id="separador">
+              <p>Este gráfico muestra la métrica en los conjuntos de entrenamiento y de validación durante las épocas de entrenamiento</p>
+              <hr/ id="separador">
+              <canvas id="popChartCuatro"></canvas>
+              <div class="center-block form-group" align="center">
+                <label id="labelFormat" for="formatoDos" class="d-inline-block">Formato</label>
+                <select id="formatoCuatro" class="d-inline-block">
+                   <option value="png">png</option>
+                   <option value="jpeg">jpeg</option>
+                   <option value="bmp">bmp</option>
+                   <option value="tiff">tiff</option>
+                </select>
+                <button id="downloadCanvasCuatro" type="button" class="btn d-inline-block">Descargar</button>
+              </div>
+            </div>
+          </section>
+          <section class="main row">
+            <div id="curvaRoc" class="col-md-12" align="center">
+              <hr/ id="separador">
+              <h2>Curvas de ROC</h2>
+              <hr/ id="separador">
+              <p>Una curva ROC (curva de característica operativa del recepto) es un gráfico que muestra el rendimiento de un modelo de clasificación en todos los umbrales de clasificación. Esta curva representa dos parámetros: Tasa de verdaderos positivos y Tasa de falsos positivos</p>
+              <hr/ id="separador">
+              <br>
+              <h2>Curvas de ROC - Macro</h2>
+              <hr/ id="separador">
+              <canvas id="popChart"></canvas>
+               <div class="center-block form-group" align="center">
+                 <label id="labelFormat" for="formatoUno" class="d-inline-block">Formato</label>
+                 <select id="formatoUno" class="d-inline-block">
+                    <option value="png">png</option>
+                    <option value="jpeg">jpeg</option>
+                    <option value="bmp">bmp</option>
+                    <option value="tiff">tiff</option>
+                 </select>
+                 <button id="downloadCanvasUno" type="button" class="btn d-inline-block">Descargar</button>
+               </div>
+            </div>
+          </section>
+          <section class="main row">
+            <div id="curvaRoc" class="col-md-12" align="center">
+              <hr/ id="separador">
+              <h2>Curvas de ROC - Micro</h2>
+              <hr/ id="separador">
+              <canvas id="popChartDos"></canvas>
+               <div class="center-block form-group" align="center">
+                 <label id="labelFormat" for="formatoUno" class="d-inline-block">Formato</label>
+                 <select id="formatoUno" class="d-inline-block">
+                    <option value="png">png</option>
+                    <option value="jpeg">jpeg</option>
+                    <option value="bmp">bmp</option>
+                    <option value="tiff">tiff</option>
+                 </select>
+                 <button id="downloadCanvasDos" type="button" class="btn d-inline-block">Descargar</button>
+               </div>
+            </div>
+          </section>
+        </div>
+     </div>
+
+     <div class="container" id="zonaPrediccion" hidden>
+       <hr/ id="separador">
+       <h1>Zona de Predicción</h1>
+       <hr/ id="separador">
+       <p>Esta sección está dedicada a la predicción de imágenes haciendo uso del modelo implementado, donde se puede subir la imagen que desee y se obtendrá la predicción de esta, con el fin de poder probar el modelo creado y entrenado</p>
+       <hr/ id="separador">
+       <section class="main row">
+         <div class="panel panel-primary col-md-5 col-sm-5">
+           <h2>1. Selecciona la imagen a enviar a predicción</h2>
+           <hr/ id="separador">
+           <div class="center-block form-group" align="center">
+             <canvas id="popChartCinco"></canvas>
+             <input type="file" multiple="false" accept="image/*" id="fininput" onchange="upload()">
+           </div>
+         </div>
+         <span class="col-md-2 col-sm-2"></span>
+         <div class="panel panel-primary col-md-5 col-sm-5">
+           <h2>2. Envía la imagen</h2>
+           <hr/ id="separador">
+           <div class="center-block form-group" align="center">
+             <button id="btnEnviarImagen" type="button" class="btn" align="center">Enviar</button>
+             <h1>Predicción</h1>
+             <hr/ id="separador">
+             <h2 id="textoPrediccion"></h2>
+           </div>
+         </div>
+       </section>
+     </div>
+
+     <div class="container" id="zonaDescarga" hidden>
+       <h1>Zona de Descarga</h1>
+       <hr/ id="separador">
+       <p>Esta sección tiene como finalidad descargar el modelo, en un formato .h5, para poder ser utilizado posteriormente; además, es posible descargar el compendio de datos generados en la función de pérdida, la métrica, y los respectivos valores de las curvas de ROC</p>
+       <hr/ id="separador">
+       <div class="col-md-6" align="center">
+         <h2>Modelo</h2>
+         <button id="downloadModelo" type="button" class="btn">Descargar Modelo</button>
+         <a id="desModelo" download="modelo.h5" href="/static/modelo.h5" hidden>compendio</a>
+       </div>
+       <div class="col-md-6" align="center">
+         <h2>Compendio de datos</h2>
+         <div class="row">
+           <div class="col-md-3">
+             <button id="downloadCompendioLoss" type="button" class="btn">Función Pérdida</button>
+             <a id="desCompendioLoss" hidden>compendio</a>
+           </div>
+           <div class="col-md-3">
+             <button id="downloadCompendioMet" type="button" class="btn">Métrica</button>
+             <a id="desCompendioMet" hidden>compendio</a>
+           </div>
+           <div class="col-md-3">
+             <button id="downloadCompendioCMicro" type="button" class="btn">ROC Micro</button>
+             <a id="desCompendioCMicro" hidden>compendio</a>
+           </div>
+           <div class="col-md-3">
+             <button id="downloadCompendioCMacro" type="button" class="btn">ROC Macro</button>
+             <a id="desCompendioCMacro" hidden>compendio</a>
+           </div>
+         </div>
+
+       </div>
+     </div>
+
+     <div id="contact">Contact</div>
+      <div id="contactForm">
+        <h1>Por favor espere,</h1>
+        <h1>se está entrenando la red neuronal por convolución</h1>
+        <img id="loadingGIF" src="{{ url_for('static', filename='images/load-image.gif') }}" alt="img caron" class="img-responsive img-fluid center-block" height="150" width="150">
+        <h5 text-align="center">Esto puede tardar algunos minutos, depende del conjunto de datos y el número de epocs asignados</h5>
+      </div>
+
+
+  <div class="container-fluid">
+    <section class="row">
+      <div class="panel panel-default" id="zonCopyRight">
+        <div class="panel-body">
+          <p align="center">GICOGE<span class="glyphicon glyphicon-copyright-mark"></span> 2018-2019</p>
+        <p align="center">Grupo de Investigación Internacional en Informática, Comunicación y Gestión del Conocimiento</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+    <!--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
+    <script src="{{ url_for('static', filename='js/downloadImages.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
