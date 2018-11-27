@@ -17,10 +17,10 @@ global name_clases
 def index():
 	return render_template('principal.html')
 
-
 @app.route('/manuales')
 def manuales():
 	return render_template('manuales.html')
+
 
 @app.route('/process', methods=['POST'])
 def process():

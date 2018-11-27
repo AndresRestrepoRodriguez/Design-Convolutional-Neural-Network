@@ -111,7 +111,7 @@ def fitModel(model, train_data, train_labels_one_hot, epochs, batch_size, test_d
     epochs=int(epochs)
     batch_size=int(batch_size)
     history=model.fit(train_data, train_labels_one_hot,epochs=epochs ,batch_size=batch_size, verbose=1, validation_data=(test_data, test_labels_one_hot))
-    model.save('D:/Users/Andres/Documents/Vera/productoCNN/static/modelo.h5')
+    model.save('D:/Documentos/Universidad/Auxiliar 2018-III/Producto 2/productoDeepLearning/productoCNN/static/modelo.h5')
     return model, history
 
 def evaluateModel(model,testData, testDataLabels):
@@ -121,7 +121,7 @@ def evaluateModel(model,testData, testDataLabels):
     #print(evaluate[1])
 
 def plotModel(model):
-    plot_model(model, to_file='D:/Users/Andres/Documents/Vera/productoCNN/static/images/model.png')
+    plot_model(model, to_file='D:/Documentos/Universidad/Auxiliar 2018-III/Producto 2/productoDeepLearning/productoCNN/static/images/model.png')
 
 def prediccion(image, opcionDataset, name_array, model):
     #model=load_model('D:/Users/Andres/Documents/Vera/productoCNN/static/modelo.h5')

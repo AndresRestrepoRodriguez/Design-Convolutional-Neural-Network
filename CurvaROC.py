@@ -14,7 +14,7 @@ import numpy as np
 
 from keras.preprocessing import image
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import keras
 from keras.models import Sequential
 from keras.layers import Dense, Conv2D, MaxPooling2D, Dropout, Flatten
