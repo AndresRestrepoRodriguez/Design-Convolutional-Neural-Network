@@ -15,3 +15,6 @@ El manual técnico realizado para esta aplicación, tiene como finalidad present
 
 ## Video Tutorial 
 Con el fin de presentar detalladamente el funcionamiento de la aplicación, se realizó un video tutorial donde se presenta la interacción entre el usuario y la plataforma. El video tutorial se encuentra disponible en la siguiente dirección: https://www.youtube.com/watch?v=BFebLIn1W4g&feature=youtu.be
+
+## Servidor de Prueba
+El servidor de Prueba se encuentra alojado en la siguiente dirección: 200.69.103.29:28600
